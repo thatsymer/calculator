@@ -17,40 +17,73 @@ allBtns.addEventListener('click', event => {
     if (key.dataset.type === "number") {
         if (display2 === "0") {
             displayTwo.textContent = keyValue
+            calculator.dataset.secondNumber = keyValue
         }
 
-        else {
+        else{ 
             displayTwo.textContent = display2 + keyValue
-            calculator.dataset.firstNumber  = display2 + keyValue
+            calculator.dataset.secondNumber = display2
         }
-        
     }
 
     // if a operator key is pressed
     if (key.dataset.type === "operator") {
-        displayOne.textContent = display2 +" " + keyValue
+        displayOne.textContent = display2 + " " + keyValue
+        calculator.dataset.firstNumber = display2
         displayTwo.textContent = "0"
         calculator.dataset.operator = keyValue
     }
 
+
     if (key.dataset.type === "clear") {
         displayOne.textContent = '0'
         displayTwo.textContent = '0'
-        result = ''
+        result = 0
     }
 
+    if (key.dataset.type === "del") {
+        displayTwo.textContent = '0'
+        calculator.dataset.secondNumber = null
+    }
+
+    if (key.dataset.type === "ptn") {
+        
+    }
+
+    
+
     if (key.dataset.type === "equal") {
-        const firstNumber = calculator.dataset.firstNumber
-        const secondNumber = display2
+        const firstNumber = parseInt(calculator.dataset.firstNumber)
+        const secondNumber = parseInt(calculator.dataset.secondNumber)
         const operator = calculator.dataset.operator
         let result = ''
-
+        
         if(operator === 'x'){
             result = firstNumber * secondNumber
-            displayTwo.textContent = '0'
-            displayOne.textContent = result
+            displayTwo.textContent = (+result.toFixed(5))
+            displayOne.textContent = '0'
+
+            result= '0'  
+            
         }
-        console.log(firstNumber,operator,secondNumber)
+
+        else if(operator === '+'){
+            result = firstNumber + secondNumber
+            displayTwo.textContent = result
+            displayOne.textContent = '0'
+            prevResult = result
+            result= '0'  
+            
+        }
+
+        else if(operator === '÷'){
+            result = firstNumber / secondNumber
+            displayTwo.textContent = (+result.toFixed(5))
+            displayOne.textContent = '0'
+            prevResult = result
+            result= '0'  
+            
+        }
     }
 
     calculator.dataset.previousKeyType = key.dataset.type;
