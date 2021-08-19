@@ -53,8 +53,8 @@ allBtns.addEventListener('click', event => {
     
 
     if (key.dataset.type === "equal") {
-        const firstNumber = parseInt(calculator.dataset.firstNumber)
-        const secondNumber = parseInt(calculator.dataset.secondNumber)
+        const firstNumber = parseFloat(calculator.dataset.firstNumber)
+        const secondNumber = parseFloat(calculator.dataset.secondNumber)
         const operator = calculator.dataset.operator
         let result = ''
         
@@ -62,25 +62,30 @@ allBtns.addEventListener('click', event => {
             result = firstNumber * secondNumber
             displayTwo.textContent = (+result.toFixed(5))
             displayOne.textContent = '0'
-
             result= '0'  
             
         }
 
-        else if(operator === '+'){
+        if(operator === '+'){
             result = firstNumber + secondNumber
             displayTwo.textContent = result
             displayOne.textContent = '0'
-            prevResult = result
             result= '0'  
             
         }
 
-        else if(operator === '÷'){
+        if(operator === '÷'){
             result = firstNumber / secondNumber
             displayTwo.textContent = (+result.toFixed(5))
             displayOne.textContent = '0'
-            prevResult = result
+            result= '0'  
+            
+        }
+
+        if(operator === '-'){
+            result = (firstNumber - secondNumber)
+            displayOne.textContent = '0'
+            displayTwo.textContent = result
             result= '0'  
             
         }
